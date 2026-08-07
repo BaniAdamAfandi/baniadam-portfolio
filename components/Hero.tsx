@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { site } from "@/lib/data";
+import { Download } from "lucide-react";
+import { useI18n } from "@/lib/i18n-provider";
 
 const Scene = dynamic(
   () => import("@/components/Scene").then((m) => m.Scene),
@@ -16,6 +18,8 @@ const Scene = dynamic(
 );
 
 export function Hero() {
+  const { t } = useI18n();
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 pb-16 md:grid-cols-[1fr_auto] md:items-center">
@@ -27,7 +31,7 @@ export function Hero() {
             className="mb-4 inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-muted"
           >
             <MapPin size={12} className="text-accent" />
-            {site.location}
+            {t("hero.location")}
           </motion.p>
 
           <motion.h1
@@ -46,7 +50,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-3 text-lg text-muted sm:text-xl"
           >
-            {site.headline}
+            {t("hero.headline")}
           </motion.p>
 
           <motion.p
@@ -55,7 +59,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-1 text-sm text-muted/70"
           >
-            {site.role}
+            {t("hero.role")}
           </motion.p>
 
           <motion.div
@@ -68,13 +72,21 @@ export function Hero() {
               href="#proyek"
               className="rounded-full bg-accent px-5 py-3 text-sm font-medium text-[#06281c] transition hover:brightness-110"
             >
-              Lihat Proyek
+              {t("hero.ctaProjects")}
             </a>
             <a
               href="#kontak"
               className="rounded-full border border-line px-5 py-3 text-sm font-medium text-fg transition hover:border-accent/60 hover:text-accent"
             >
-              Hubungi Saya
+              {t("hero.ctaContact")}
+            </a>
+            <a
+              href="/CV-Bani-Adam-Afandi.pdf"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-accent/50 px-5 py-3 text-sm font-medium text-accent transition hover:bg-accent/10"
+            >
+              <Download size={15} />
+              {t("hero.ctaCv")}
             </a>
           </motion.div>
         </div>

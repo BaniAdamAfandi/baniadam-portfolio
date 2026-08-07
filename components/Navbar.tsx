@@ -3,10 +3,23 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { navLinks, site } from "@/lib/data";
+import { site } from "@/lib/data";
+import { useI18n } from "@/lib/i18n-provider";
+import type { MsgKey } from "@/lib/i18n";
+
+const NAV_LINKS: { href: string; key: MsgKey }[] = [
+  { href: "#tentang", key: "nav.about" },
+  { href: "#keahlian", key: "nav.skills" },
+  { href: "#pengalaman", key: "nav.experience" },
+  { href: "#proyek", key: "nav.projects" },
+  { href: "#layanan", key: "nav.services" },
+  { href: "#kontak", key: "nav.contact" },
+];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { locale, setLocale, t } = useI18n();
+  const next: "id" | "en" = locale === "id" ? "en" : "id";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -20,32 +33,46 @@ export function Navbar() {
           </a>
 
           <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((l) => (
+            {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 className="text-sm text-muted transition-colors hover:text-fg"
               >
-                {l.label}
+                {t(l.key)}
               </a>
             ))}
+            <button
+              onClick={() => setLocale(next)}
+              aria-label={t("lang.toggle")}
+              className="rounded-full border border-line px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted transition hover:border-accent/60 hover:text-accent"
+            >
+              {next}
+            </button>
             <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${site.email}`}
               className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-[#06281c] transition hover:brightness-110"
             >
-              Hubungi
+              {t("cta.contact")}
             </a>
           </div>
 
-          <button
-            className="p-2 text-fg md:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Tutup menu" : "Buka menu"}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={() => setLocale(next)}
+              aria-label={t("lang.toggle")}
+              className="rounded-full border border-line px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted transition hover:border-accent/60 hover:text-accent"
+            >
+              {next}
+            </button>
+            <button
+              className="p-2 text-fg"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? t("nav.menuClose") : t("nav.menuOpen")}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </nav>
       </div>
 
@@ -58,23 +85,21 @@ export function Navbar() {
             className="border-b border-line bg-background md:hidden"
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
-              {navLinks.map((l) => (
+              {NAV_LINKS.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-2 py-3 text-sm text-muted hover:bg-card hover:text-fg"
                 >
-                  {l.label}
+                  {t(l.key)}
                 </a>
               ))}
               <a
-                href={site.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${site.email}`}
                 className="mt-2 rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-[#06281c]"
               >
-                Hubungi
+                {t("cta.contact")}
               </a>
             </div>
           </motion.div>

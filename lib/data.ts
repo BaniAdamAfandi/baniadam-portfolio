@@ -1,123 +1,186 @@
+import type { MsgKey } from "./i18n";
+
 export const site = {
   name: "Bani Adam Afandi",
-  headline: "Digital Growth & Web Performance",
-  role: "Digital Marketer · Next.js Developer",
-  location: "Indonesia",
-  email: "halo@baniadam.biz.id",
-  whatsapp: "https://wa.me/6281234567890",
+  email: "Bani.adam.afandi@gmail.com",
+  website: "bani.adam.biz.id",
   linkedin: "https://www.linkedin.com/in/bani-adam-afandi-747038179",
 };
 
-export const navLinks = [
-  { href: "#tentang", label: "Tentang" },
-  { href: "#keahlian", label: "Keahlian" },
-  { href: "#proyek", label: "Proyek" },
-  { href: "#layanan", label: "Layanan" },
-  { href: "#kontak", label: "Kontak" },
-];
-
-export const bio = [
-  "Membantu bisnis tumbuh lewat data: performance marketing, web performance optimization, dan engineering.",
-  "Fokus pada Core Web Vitals, GA4, Google Ads, dan membangun produk web yang cepat — bermakna, bukan sekadar cantik.",
-];
-
-export const stats = [
-  { value: "5+", label: "Tahun Pengalaman" },
-  { value: "20+", label: "Proyek Selesai" },
-  { value: "90+", label: "Skor CWV Target" },
-  { value: "3x+", label: "ROAS Optimal" },
-];
-
 export const skills = [
   {
-    title: "Frontend",
+    title: "Product",
     items: [
-      { name: "Next.js", level: 88 },
-      { name: "React", level: 85 },
-      { name: "Tailwind CSS", level: 82 },
-      { name: "TypeScript", level: 78 },
+      { name: "Product Ownership & Roadmap", level: 92 },
+      { name: "Backlog Prioritization & PRD", level: 90 },
+      { name: "User Stories & Acceptance Criteria", level: 90 },
+      { name: "Starac & UAT · Agile/Scrum", level: 88 },
     ],
   },
   {
-    title: "Marketing & Data",
+    title: "Technical & QA",
     items: [
-      { name: "GA4", level: 92 },
-      { name: "Google Ads", level: 90 },
-      { name: "SEO / Core Web Vitals", level: 88 },
-      { name: "Google Tag Manager", level: 85 },
+      { name: "REST API & System Integration", level: 90 },
+      { name: "SQL & Database Analysis", level: 88 },
+      { name: "Functional · Regression · API · E2E", level: 90 },
+      { name: "Test Automation & Root Cause", level: 86 },
     ],
   },
   {
-    title: "Platform",
+    title: "Tools & Domain",
     items: [
-      { name: "WordPress", level: 84 },
-      { name: "LiteSpeed Cache", level: 85 },
-      { name: "Vercel", level: 80 },
-      { name: "Three.js / 3D", level: 72 },
+      { name: "Postman · ClickUp · Figma", level: 88 },
+      { name: "Firebase · GA4 · GTM · Datadog", level: 85 },
+      { name: "Strategic & Digital Deposits · Payments", level: 87 },
+      { name: "KYC · EdTech · Git/GitHub", level: 84 },
     ],
   },
 ];
 
-export const projects = [
+export type Experience = {
+  role: string;
+  company: string;
+  type: MsgKey;
+  period: MsgKey;
+  location: MsgKey;
+  bullets: MsgKey[];
+};
+
+export const experiences: Experience[] = [
+  {
+    role: "Product Owner",
+    company: "Komunal Indonesia",
+    type: "exp.type.fulltime",
+    period: "exp.1.period",
+    location: "exp.loc.remote",
+    bullets: [
+      "exp.1.b1",
+      "exp.1.b2",
+      "exp.1.b3",
+      "exp.1.b4",
+      "exp.1.b5",
+      "exp.1.b6",
+    ],
+  },
+  {
+    role: "Junior SDET (Software Development Engineer in Test)",
+    company: "Kuncie",
+    type: "exp.type.fulltime",
+    period: "exp.2.period",
+    location: "exp.loc.hybrid",
+    bullets: ["exp.2.b1", "exp.2.b2", "exp.2.b3", "exp.2.b4"],
+  },
+  {
+    role: "Mentor QA",
+    company: "Jago QA Institute",
+    type: "exp.type.freelance",
+    period: "exp.3.period",
+    location: "exp.loc.remote",
+    bullets: ["exp.3.b1"],
+  },
+  {
+    role: "Software QA Tester",
+    company: "PT Mitra Transaksi Indonesia (\"yokke!\")",
+    type: "exp.type.contract",
+    period: "exp.4.period",
+    location: "exp.loc.south",
+    bullets: ["exp.4.b1", "exp.4.b2"],
+  },
+  {
+    role: "Administrator Database PRM",
+    company: "Kalbe Nutritionals (PT Sanghiang Perkasa)",
+    type: "exp.type.contract",
+    period: "exp.5.period",
+    location: "exp.loc.north",
+    bullets: ["exp.5.b1", "exp.5.b2"],
+  },
+];
+
+export type Education = {
+  school: string;
+  degree: MsgKey;
+  period: string;
+  focus: MsgKey;
+  orgs: string[];
+};
+
+export const education: Education[] = [
+  {
+    school: "Universitas AMIKOM Yogyakarta",
+    degree: "edu.degree",
+    period: "Sep 2016 – Feb 2020",
+    focus: "edu.focus",
+    orgs: [
+      "Keluarga Mahasiswa Riau Amikom",
+      "Amikom Computer Club",
+      "Komunitas Game Developer Jogja",
+    ],
+  },
+];
+
+export type Project = {
+  title: string;
+  tag: MsgKey;
+  year: string;
+  desc: MsgKey;
+  url: string | null;
+};
+
+export const projects: Project[] = [
   {
     title: "IndonesiaForklift",
-    tag: "B2B Alat Berat",
+    tag: "proj.tag.b2bHeavy",
     year: "2025",
-    desc: "Website B2B alat berat. Optimasi Core Web Vitals, GA4 + Google Ads tracking, WA conversion pipeline.",
+    desc: "proj.desc.forklift",
     url: "https://indonesiaforklift.com",
   },
   {
     title: "Sayurindo",
-    tag: "Agribisnis",
+    tag: "proj.tag.agri",
     year: "2025",
-    desc: "Sektor agribisnis. Kampanye Google Ads berbasis data, target MBG/SPPG.",
+    desc: "proj.desc.sayurindo",
     url: "https://sayurindo.id",
   },
   {
     title: "9Router",
-    tag: "Self-hosted AI Gateway",
+    tag: "proj.tag.aiGateway",
     year: "2025",
-    desc: "Self-hosted AI gateway. Routing, optimasi provider, manajemen keys dan model di server sendiri.",
-    url: null,
-  },
-  {
-    title: "YouTube Content Pipeline",
-    tag: "AI Agents",
-    year: "2025",
-    desc: "Pipeline produksi konten: transcript → ringkasan → blog → social content pakai AI agents.",
+    desc: "proj.desc.9router",
     url: null,
   },
   {
     title: "baniadam-portfolio",
-    tag: "Website Ini",
+    tag: "proj.tag.thisSite",
     year: "2026",
-    desc: "Portfolio pribadi: Next.js, 3D hero, optimasi Core Web Vitals dari sisi engineering.",
+    desc: "proj.desc.baniadam",
     url: null,
   },
   {
     title: "20+ Proyek Lainnya",
-    tag: "Portfolio",
+    tag: "proj.tag.20plus",
     year: "—",
-    desc: "Beragam proyek growth marketing dan pengembangan web untuk berbagai skala bisnis.",
+    desc: "proj.desc.20plus",
     url: null,
   },
 ];
 
-export const services = [
+export type Service = { title: MsgKey; desc: MsgKey };
+
+export const services: Service[] = [
   {
-    title: "Web Performance",
-    desc: "Audit & optimasi Core Web Vitals, Lighthouse, image & code splitting.",
+    title: "services.s1.title",
+    desc: "services.s1.desc",
   },
   {
-    title: "Growth Marketing",
-    desc: "GA4 analytics, Google Ads, tracking pipeline yang terukur.",
+    title: "services.s2.title",
+    desc: "services.s2.desc",
   },
   {
-    title: "Next.js Development",
-    desc: "Website modern, SEO-friendly, dan cepat.",
+    title: "services.s3.title",
+    desc: "services.s3.desc",
   },
   {
-    title: "Data & Tracking",
-    desc: "GA4 events, Ads conversions, WA tracking, TikTok pixels.",
+    title: "services.s4.title",
+    desc: "services.s4.desc",
   },
 ];

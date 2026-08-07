@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/SectionHeader";
 import { skills } from "@/lib/data";
+import { useI18n } from "@/lib/i18n-provider";
 
 function SkillCard({
   title,
@@ -46,12 +47,13 @@ function SkillCard({
 }
 
 export function Skills() {
+  const { t } = useI18n();
   return (
     <section id="keahlian" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <SectionHeader
-        eyebrow="Keahlian"
-        title="Teknologi & keterampilan"
-        sub="Perpaduan engineering dan pemasaran berbasis data."
+        eyebrow={t("skills.eyebrow")}
+        title={t("skills.title")}
+        sub={t("skills.sub")}
       />
       <div className="grid gap-5 md:grid-cols-3">
         {skills.map((cat, i) => (

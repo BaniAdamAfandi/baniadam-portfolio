@@ -1,15 +1,19 @@
+"use client";
+
 import { ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects } from "@/lib/data";
+import { useI18n } from "@/lib/i18n-provider";
 
 export function Projects() {
+  const { t } = useI18n();
   return (
     <section id="proyek" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <SectionHeader
-        eyebrow="Proyek"
-        title="Karya terpilih"
-        sub="Campuran engineering, performance, dan growth marketing."
+        eyebrow={t("proj.eyebrow")}
+        title={t("proj.title")}
+        sub={t("proj.sub")}
       />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p, i) => (
@@ -23,7 +27,7 @@ export function Projects() {
             >
               <div className="mb-4 flex items-center justify-between">
                 <span className="rounded-full border border-line px-3 py-1 text-xs text-muted">
-                  {p.tag}
+                  {t(p.tag)}
                 </span>
                 <span className="text-xs text-muted">{p.year}</span>
               </div>
@@ -37,7 +41,7 @@ export function Projects() {
                 )}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                {p.desc}
+                {t(p.desc)}
               </p>
             </a>
           </Reveal>
