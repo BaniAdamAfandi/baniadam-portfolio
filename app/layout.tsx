@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n-provider";
+import { site } from "@/lib/data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,10 +14,42 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://baniadam.biz.id";
+
 export const metadata: Metadata = {
-  title: "Bani Adam Afandi — Digital Growth & Web Performance",
+  metadataBase: new URL(SITE_URL),
+  title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
   description:
     "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
+    description:
+      "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+    url: SITE_URL,
+    type: "website",
+    siteName: site.name,
+    images: ["/icon.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
+    description:
+      "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+    images: ["/icon.png"],
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: "Product Owner & Software Quality Engineer",
+  url: SITE_URL,
+  email: site.email,
+  sameAs: [site.linkedin],
 };
 
 export default function RootLayout({
@@ -25,6 +58,12 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>

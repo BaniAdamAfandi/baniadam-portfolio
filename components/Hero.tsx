@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { ArrowDown, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { site } from "@/lib/data";
 import { useI18n } from "@/lib/i18n-provider";
 
@@ -16,8 +17,33 @@ const Scene = dynamic(
   }
 );
 
+// Static stand-in until the Scene chunk loads — keeps the hero from looking
+// empty while three.js is still off the critical path.
+function SceneFallback() {
+  return (
+    <div className="relative h-64 w-64 sm:h-80 sm:w-80" aria-hidden>
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(110,231,183,0.35),rgba(110,231,183,0.08)_55%,transparent_70%)]" />
+      <div className="absolute inset-4 rounded-full border border-emerald-400/20" />
+      <div className="absolute inset-10 rounded-full border border-emerald-400/10" />
+    </div>
+  );
+}
+
 export function Hero() {
   const { t } = useI18n();
+  const [ready, setReady] = useState(false);
+
+  // three.js + R3F (~500KB) loads after first paint: mount Scene only once the
+  // browser is idle. The hero is above the fold, so an IntersectionObserver
+  // would fire immediately — idle callback (or 2s fallback) defers it instead.
+  useEffect(() => {
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(() => setReady(true), { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(() => setReady(true), 2000);
+    return () => window.clearTimeout(id);
+  }, []);
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24">
@@ -96,7 +122,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mx-auto"
         >
-          <Scene />
+          {ready ? <Scene /> : <SceneFallback />}
         </motion.div>
       </div>
     </section>
