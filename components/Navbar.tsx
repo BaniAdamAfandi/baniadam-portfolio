@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Languages, Menu, X } from "lucide-react";
 import { site } from "@/lib/data";
 import { useI18n } from "@/lib/i18n-provider";
 import type { MsgKey } from "@/lib/i18n";
@@ -16,10 +16,48 @@ const NAV_LINKS: { href: string; key: MsgKey }[] = [
   { href: "#kontak", key: "nav.contact" },
 ];
 
+function LangSwitch({
+  locale,
+  setLocale,
+  t,
+}: {
+  locale: "id" | "en";
+  setLocale: (l: "id" | "en") => void;
+  t: (k: MsgKey) => string;
+}) {
+  const codes = ["id", "en"] as const;
+  return (
+    <div
+      role="group"
+      aria-label={t("lang.toggle")}
+      className="inline-flex items-center gap-0.5 rounded-full border border-line p-0.5"
+    >
+      <Languages size={14} aria-hidden className="ml-1.5 text-muted" />
+      {codes.map((c) => {
+        const active = locale === c;
+        return (
+          <button
+            key={c}
+            onClick={() => setLocale(c)}
+            aria-pressed={active}
+            aria-label={t("lang.current") + ": " + c.toUpperCase()}
+            className={
+              active
+                ? "rounded-full bg-accent px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-[#06281c]"
+                : "rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-muted transition hover:text-fg"
+            }
+          >
+            {c}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { locale, setLocale, t } = useI18n();
-  const next: "id" | "en" = locale === "id" ? "en" : "id";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -42,13 +80,7 @@ export function Navbar() {
                 {t(l.key)}
               </a>
             ))}
-            <button
-              onClick={() => setLocale(next)}
-              aria-label={t("lang.toggle")}
-              className="rounded-full border border-line px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted transition hover:border-accent/60 hover:text-accent"
-            >
-              {next}
-            </button>
+            <LangSwitch locale={locale} setLocale={setLocale} t={t} />
             <a
               href={`mailto:${site.email}`}
               className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-[#06281c] transition hover:brightness-110"
@@ -58,13 +90,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
-            <button
-              onClick={() => setLocale(next)}
-              aria-label={t("lang.toggle")}
-              className="rounded-full border border-line px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted transition hover:border-accent/60 hover:text-accent"
-            >
-              {next}
-            </button>
+            <LangSwitch locale={locale} setLocale={setLocale} t={t} />
             <button
               className="p-2 text-fg"
               onClick={() => setOpen((v) => !v)}

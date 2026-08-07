@@ -1,10 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { MapPin } from "lucide-react";
+import { ArrowDown, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { site } from "@/lib/data";
-import { Download } from "lucide-react";
 import { useI18n } from "@/lib/i18n-provider";
 
 const Scene = dynamic(
@@ -85,7 +84,7 @@ export function Hero() {
               download
               className="inline-flex items-center gap-2 rounded-full border border-accent/50 px-5 py-3 text-sm font-medium text-accent transition hover:bg-accent/10"
             >
-              <Download size={15} />
+              <ArrowDown size={15} />
               {t("hero.ctaCv")}
             </a>
           </motion.div>
