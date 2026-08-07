@@ -1,5 +1,6 @@
 "use client";
 
+import { Logo } from "@/components/Logo";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Languages, Menu, X } from "lucide-react";
@@ -63,12 +64,7 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="border-b border-line/60 bg-background/80 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <a
-            href="#"
-            className="text-sm font-semibold tracking-tight text-accent"
-          >
-            ba<span className="text-fg">.</span>afandi
-          </a>
+          <Logo />
 
           <div className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((l) => (
