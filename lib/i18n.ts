@@ -36,7 +36,7 @@ const ID = {
     "Side work / keahlian tambahan: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — lewat proyek nyata: indonesiaforklift dan sayurindo.",
   "about.stat.1": "Tahun Pengalaman",
   "about.stat.2": "Proyek & Produk Digital",
-  "about.stat.3": "Sektor: Fintech, EdTech, E-commerce",
+  "about.stat.3": "Sektor: Fintech & EdTech",
   "about.stat.4": "Tahun Produk Fintech",
 
   // Skills
@@ -183,7 +183,7 @@ const EN: Record<MsgKey, string> = {
     "Side work / additional expertise: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — via real projects: indonesiaforklift and sayurindo.",
   "about.stat.1": "Years of Experience",
   "about.stat.2": "Projects & Digital Products",
-  "about.stat.3": "Sectors: Fintech, EdTech, E-commerce",
+  "about.stat.3": "Sectors: Fintech & EdTech",
   "about.stat.4": "Years in Fintech Products",
 
   "skills.eyebrow": "Skills",
