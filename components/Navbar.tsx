@@ -14,7 +14,6 @@ const NAV_LINKS: { href: string; key: MsgKey }[] = [
   { href: "#pengalaman", key: "nav.experience" },
   { href: "#proyek", key: "nav.projects" },
   { href: "#layanan", key: "nav.services" },
-  { href: "#kontak", key: "nav.contact" },
 ];
 
 function LangSwitch({

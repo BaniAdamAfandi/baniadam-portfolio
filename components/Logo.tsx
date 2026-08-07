@@ -54,7 +54,7 @@ export function Logo() {
     <a href="#" className="inline-flex items-center gap-2" aria-label={site.name}>
       <Mark className="h-8 w-8 shrink-0" />
       <span className="hidden text-sm font-semibold tracking-tight text-accent sm:inline">
-        ba<span className="text-fg">.</span>afandi
+        Bani Adam <span className="text-fg">Afandi</span>
       </span>
     </a>
   );
