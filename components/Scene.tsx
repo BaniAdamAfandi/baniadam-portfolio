@@ -24,6 +24,7 @@ const LABELS = [
   "WordPress",
 ];
 
+// anchor offsets (% of container), spread around the sphere at alternating radii
 const ANCHORS = [
   { x: "76%", y: "0%" },
   { x: "54%", y: "-26%" },
@@ -42,6 +43,8 @@ const ANCHORS = [
   { x: "0%", y: "74%" },
 ];
 
+// per-label orbit radius multiplier — stagger chips onto concentric rings so
+// adjacent labels sweep different radii instead of colliding on one orbit.
 const RINGS = [0.33, 0.593, 0.742, 1.054, 1.07, 1.696, 0.814, 0.936, 1.25, 1.247, 1.207, 0.581, 1.522, 0.965, 0.209];
 
 // orbit duration + direction per label (staggered so chips rarely overlap)
@@ -71,47 +74,15 @@ const LONG_LABELS: Record<string, boolean> = {
 
 const BURST_COUNT = 48;
 const BURST_LIFE = 0.9;
-const NODE_COUNT = 96;
-const DUST_COUNT = 300;
-
-// seeded LCG — same numbers every load, no Math.random in render loop
-function makeRng(seed: number) {
-  let s = seed;
-  return () => {
-    s = (s * 9301 + 49297) % 233280;
-    return s / 233280;
-  };
-}
-
-const NODE_VERTEX = /* glsl */ `
-  uniform float uTime;
-  uniform float uSize;
-  attribute float aPhase;
-  attribute float aBoost;
-  varying float vPulse;
-  void main() {
-    vPulse = 1.0 + aBoost * 0.5 * sin(uTime * 1.7 + aPhase);
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = uSize * vPulse * (320.0 / -mv.z);
-    gl_Position = projectionMatrix * mv;
-  }
-`;
-
-const NODE_FRAGMENT = /* glsl */ `
-  uniform vec3 uColor;
-  varying float vPulse;
-  void main() {
-    float d = length(gl_PointCoord - 0.5);
-    float a = smoothstep(0.5, 0.08, d) * vPulse;
-    gl_FragColor = vec4(uColor * vPulse, a);
-  }
-`;
 
 function FloatingLabels({ radius, narrow }: { radius: number; narrow: boolean }) {
   const reduce = useReducedMotion();
+  // On narrow (mobile) show a subset — 256px can't fit 15 chips without overlap
+  const visible = narrow ? LABELS.filter((_, i) => i % 2 === 0) : LABELS;
   return (
     <div className="pointer-events-none absolute inset-0">
-      {LABELS.map((label, i) => {
+      {visible.map((label, j) => {
+        const i = narrow ? j * 2 : j;
         const { d, r } = ORBITS[i];
         const a = ANCHORS[i];
         // anchor offsets in % of container, orbit shrinks on narrow widths
@@ -151,80 +122,22 @@ function FloatingLabels({ radius, narrow }: { radius: number; narrow: boolean })
 }
 
 function HeroScene() {
-  const reduce = useReducedMotion();
-  const graph = useRef<THREE.Group>(null);
+  const mesh = useRef<THREE.Mesh>(null);
   const dust = useRef<THREE.Group>(null);
-  const nodeMat = useRef<THREE.ShaderMaterial>(null);
   const burstPoints = useRef<THREE.Points>(null);
   const burstAttr = useRef<THREE.BufferAttribute>(null);
   const burstMat = useRef<THREE.PointsMaterial>(null);
 
-  // --- node cloud: positions + per-node pulse phase/boost ---
-  const nodes = useMemo(() => {
-    const rand = makeRng(42);
-    const pos = new Float32Array(NODE_COUNT * 3);
-    const phase = new Float32Array(NODE_COUNT);
-    const boost = new Float32Array(NODE_COUNT);
-    for (let i = 0; i < NODE_COUNT; i++) {
-      // random direction, radius 1.5–3 biased outward → loose cloud, not a shell
-      const r = 1.5 + Math.pow(rand(), 0.7) * 1.5;
-      const theta = rand() * Math.PI * 2;
-      const phi = Math.acos(2 * rand() - 1);
-      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = r * Math.cos(phi);
-      phase[i] = rand() * Math.PI * 2;
-      boost[i] = rand() < 0.1 ? 1 : 0.3; // ~10 nodes pulse brightly
-    }
-    return { pos, phase, boost };
-  }, []);
-
-  // --- edges: each node links to its 2–4 nearest neighbors, deduped ---
-  const edges = useMemo(() => {
-    const rand = makeRng(1337);
-    const seen = new Set<number>();
-    const pairs: number[][] = [];
-    for (let i = 0; i < NODE_COUNT; i++) {
-      const k = 2 + Math.floor(rand() * 3);
-      const ix = i * 3;
-      const dists: Array<[number, number]> = [];
-      for (let j = 0; j < NODE_COUNT; j++) {
-        if (j === i) continue;
-        const jx = j * 3;
-        const dx = nodes.pos[ix] - nodes.pos[jx];
-        const dy = nodes.pos[ix + 1] - nodes.pos[jx + 1];
-        const dz = nodes.pos[ix + 2] - nodes.pos[jx + 2];
-        dists.push([j, dx * dx + dy * dy + dz * dz]);
-      }
-      dists.sort((a, b) => a[1] - b[1]);
-      for (let n = 0; n < k; n++) {
-        const j = dists[n][0];
-        const key = Math.min(i, j) * NODE_COUNT + Math.max(i, j);
-        if (!seen.has(key)) {
-          seen.add(key);
-          pairs.push([i, j]);
-        }
-      }
-    }
-    const arr = new Float32Array(pairs.length * 6);
-    pairs.forEach(([a, b], p) => {
-      const ax = a * 3;
-      const bx = b * 3;
-      arr[p * 6] = nodes.pos[ax];
-      arr[p * 6 + 1] = nodes.pos[ax + 1];
-      arr[p * 6 + 2] = nodes.pos[ax + 2];
-      arr[p * 6 + 3] = nodes.pos[bx];
-      arr[p * 6 + 4] = nodes.pos[bx + 1];
-      arr[p * 6 + 5] = nodes.pos[bx + 2];
-    });
-    return arr;
-  }, [nodes]);
-
   const dustPositions = useMemo(() => {
-    const rand = makeRng(42);
-    const arr = new Float32Array(DUST_COUNT * 3);
-    for (let i = 0; i < DUST_COUNT; i++) {
-      const r = 2.6 + rand() * 1.6;
+    const count = 300;
+    const arr = new Float32Array(count * 3);
+    let seed = 42;
+    const rand = () => {
+      seed = (seed * 9301 + 49297) % 233280;
+      return seed / 233280;
+    };
+    for (let i = 0; i < count; i++) {
+      const r = 2.4 + rand() * 1.6;
       const theta = rand() * Math.PI * 2;
       const phi = Math.acos(2 * rand() - 1);
       arr[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -247,19 +160,14 @@ function HeroScene() {
     pulse.current = Math.max(0, pulse.current - delta * 2.4);
     spin.current = Math.max(1, spin.current - delta * 1.6);
 
-    const g = graph.current;
-    if (g) {
-      if (reduce) {
-        g.rotation.z = 0.35;
-      } else {
-        g.rotation.x = t.current * 0.07 + Math.sin(t.current * 0.4) * 0.05;
-        g.rotation.y = t.current * 0.13 * spin.current + Math.cos(t.current * 0.3) * 0.07;
-        g.rotation.z = t.current * 0.045 + Math.sin(t.current * 0.22) * 0.04;
-      }
-      g.scale.setScalar(1 + pulse.current * 0.18);
+    const m = mesh.current;
+    if (m) {
+      const breathe = 1 + Math.sin(t.current * 1.4) * 0.025;
+      m.scale.setScalar(breathe * (1 + pulse.current * 0.22));
+      m.rotation.x = t.current * 0.15 + Math.sin(t.current * 0.5) * 0.1;
+      m.rotation.y = t.current * 0.25 * spin.current + Math.cos(t.current * 0.35) * 0.08;
     }
     if (dust.current) dust.current.rotation.y += delta * 0.02;
-    if (nodeMat.current) nodeMat.current.uniforms.uTime.value = t.current;
 
     if (burstAge.current >= 0) {
       burstAge.current += delta;
@@ -306,47 +214,22 @@ function HeroScene() {
 
   return (
     <group>
-      <group ref={graph} rotation={[0.4, 0, 0.25]}>
-        {/* invisible hit target around the whole cloud */}
+      <group rotation={[0.4, 0, 0.25]}>
         <mesh
+          ref={mesh}
           onClick={onBurst}
           onPointerOver={() => (document.body.style.cursor = "pointer")}
           onPointerOut={() => (document.body.style.cursor = "")}
         >
-          <sphereGeometry args={[3.2, 16, 16]} />
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-        </mesh>
-        <points>
-          <bufferGeometry>
-            <bufferAttribute attach="attributes-position" args={[nodes.pos, 3]} />
-            <bufferAttribute attach="attributes-aPhase" args={[nodes.phase, 1]} />
-            <bufferAttribute attach="attributes-aBoost" args={[nodes.boost, 1]} />
-          </bufferGeometry>
-          <shaderMaterial
-            ref={nodeMat}
-            vertexShader={NODE_VERTEX}
-            fragmentShader={NODE_FRAGMENT}
-            uniforms={{
-              uTime: { value: 0 },
-              uSize: { value: 0.05 },
-              uColor: { value: new THREE.Color("#6ee7b7") },
-            }}
-            transparent
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
-          />
-        </points>
-        <lineSegments>
-          <bufferGeometry>
-            <bufferAttribute attach="attributes-position" args={[edges, 3]} />
-          </bufferGeometry>
-          <lineBasicMaterial
+          <icosahedronGeometry args={[1, 6]} />
+          <meshStandardMaterial
             color="#6ee7b7"
-            transparent
-            opacity={0.22}
-            depthWrite={false}
+            wireframe
+            roughness={0.6}
+            metalness={0.2}
+            flatShading
           />
-        </lineSegments>
+        </mesh>
         <group ref={dust}>
           <points>
             <bufferGeometry>
@@ -372,7 +255,6 @@ function HeroScene() {
     </group>
   );
 }
-
 export function Scene() {
   const wrap = useRef<HTMLDivElement>(null);
   const [narrow, setNarrow] = useState(false);
@@ -392,11 +274,13 @@ export function Scene() {
         camera={{ position: [0, 0, 5], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
       >
+        <ambientLight intensity={0.6} />
+        <pointLight position={[5, 5, 5]} intensity={20} />
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
       </Canvas>
-      <FloatingLabels radius={narrow ? 0.52 : 0.55} narrow={narrow} />
+      <FloatingLabels radius={0.65} narrow={narrow} />
     </div>
   );
 }
