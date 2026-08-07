@@ -128,6 +128,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "DepositoBPR by Komunal",
+    tag: "proj.tag.komunal",
+    year: "2023–Present",
+    desc: "proj.desc.depositobpr",
+    url: "https://depositobpr.co.id",
+  },
+  {
+    title: "Kuncie",
+    tag: "proj.tag.edtech",
+    year: "2022–2023",
+    desc: "proj.desc.kuncie",
+    url: "https://kuncie.id",
+  },
+  {
     title: "IndonesiaForklift",
     tag: "proj.tag.b2bHeavy",
     year: "2025",
@@ -140,20 +154,6 @@ export const projects: Project[] = [
     year: "2025",
     desc: "proj.desc.sayurindo",
     url: "https://sayurindo.id",
-  },
-  {
-    title: "9Router",
-    tag: "proj.tag.aiGateway",
-    year: "2025",
-    desc: "proj.desc.9router",
-    url: null,
-  },
-  {
-    title: "baniadam-portfolio",
-    tag: "proj.tag.thisSite",
-    year: "2026",
-    desc: "proj.desc.baniadam",
-    url: null,
   },
   {
     title: "20+ Proyek Lainnya",

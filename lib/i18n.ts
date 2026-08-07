@@ -17,9 +17,8 @@ const ID = {
 
   // Hero
   "hero.location": "Jakarta, Indonesia",
-  "hero.headline":
-    "Product Owner | Technical Product Manager | Fintech | Software Quality Engineering",
-  "hero.role": "Product Owner & TPM · Fintech",
+  "hero.headline": "Product Owner & Software Quality Engineer",
+  "hero.role": "Product Owner & Software Quality Engineer",
   "hero.ctaProjects": "Lihat Proyek",
   "hero.ctaContact": "Hubungi Saya",
   "hero.ctaCv": "Unduh CV",
@@ -34,7 +33,7 @@ const ID = {
   "about.bio.3":
     "Hands-on dengan API, database, integrasi, troubleshooting produksi, dan pengiriman software end-to-end.",
   "about.bio.4":
-    "Side work / keahlian tambahan: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — lewat proyek nyata: indonesiaforklift, sayurindo, 9Router, dan portfolio ini.",
+    "Side work / keahlian tambahan: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — lewat proyek nyata: indonesiaforklift dan sayurindo.",
   "about.stat.1": "Tahun Pengalaman",
   "about.stat.2": "Proyek & Produk Digital",
   "about.stat.3": "Sektor: Fintech, EdTech, E-commerce",
@@ -104,17 +103,17 @@ const ID = {
   "proj.sub": "Campuran engineering, performance, dan growth marketing.",
   "proj.tag.b2bHeavy": "Side Project · B2B Alat Berat",
   "proj.tag.agri": "Side Project · Agribisnis",
-  "proj.tag.aiGateway": "Side Project · AI Gateway",
-  "proj.tag.thisSite": "Website Ini",
+  "proj.tag.komunal": "Product Owner · Fintech",
+  "proj.tag.edtech": "EdTech · Product",
   "proj.tag.20plus": "Portfolio",
   "proj.desc.forklift":
     "Website B2B alat berat. Optimasi Core Web Vitals, GA4 + Google Ads tracking, WA conversion pipeline.",
   "proj.desc.sayurindo":
     "Sektor agribisnis dan distribusi sayur. Kampanye Google Ads berbasis data.",
-  "proj.desc.9router":
-    "Self-hosted AI gateway untuk routing dan optimasi model, manajemen keys pada server sendiri.",
-  "proj.desc.baniadam":
-    "Portfolio pribadi: Next.js, 3D hero, optimasi Core Web Vitals dari sisi engineering.",
+  "proj.desc.depositobpr":
+    "Produk deposito digital yang saya kelola sebagai Product Owner — DepositoBPR by Komunal. Platform deposito digital bank perekonomian rakyat (BPR) dengan proto digital deposit experience, KYC, dan onboarding.",
+  "proj.desc.kuncie":
+    "Platform pembelajaran digital (edtech) — kualitas produk diuji lewat testing otomatis & E2E.",
   "proj.20plus.title": "20+ Proyek Lainnya",
   "proj.desc.20plus":
     "Beragam proyek growth marketing dan pengembangan web untuk berbagai skala bisnis.",
@@ -133,9 +132,9 @@ const ID = {
   "services.s3.title": "QA & Test Automation",
   "services.s3.desc":
     "Strategi testing functional, API, regression, E2E, dan root-cause analysis yang berkelanjutan.",
-  "services.s4.title": "Integrasi & Perbankan Digital",
+  "services.s4.title": "Integrasi CRM & Omnichannel",
   "services.s4.desc":
-    "Mendukung integrasi pihak ketiga, alur pembayaran, dan kepatuhan KYC / APU-PPT.",
+    "Integrasi CRM, omnichannel customer service, dan chatbot untuk mendukung operasional layanan pelanggan yang mulus.",
 
   // Contact
   "contact.title.a": "Punya proyek?",
@@ -166,9 +165,8 @@ const EN: Record<MsgKey, string> = {
   "cta.contact": "Contact",
 
   "hero.location": "Jakarta, Indonesia",
-  "hero.headline":
-    "Product Owner | Technical Product Manager | Fintech | Software Quality Engineering",
-  "hero.role": "Product Owner & TPM · Fintech",
+  "hero.headline": "Product Owner & Software Quality Engineer",
+  "hero.role": "Product Owner & Software Quality Engineer",
   "hero.ctaProjects": "View Projects",
   "hero.ctaContact": "Contact Me",
   "hero.ctaCv": "Download CV",
@@ -182,7 +180,7 @@ const EN: Record<MsgKey, string> = {
   "about.bio.3":
     "Hands-on with APIs, databases, integrations, production troubleshooting, and end-to-end software delivery.",
   "about.bio.4":
-    "Side work / additional expertise: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — via real projects: indonesiaforklift, sayurindo, 9Router, and this portfolio.",
+    "Side work / additional expertise: growth & web performance engineering — Core Web Vitals, GA4, Google Ads — via real projects: indonesiaforklift and sayurindo.",
   "about.stat.1": "Years of Experience",
   "about.stat.2": "Projects & Digital Products",
   "about.stat.3": "Sectors: Fintech, EdTech, E-commerce",
@@ -245,17 +243,17 @@ const EN: Record<MsgKey, string> = {
   "proj.sub": "A mix of engineering, performance, and growth marketing.",
   "proj.tag.b2bHeavy": "Side Project · B2B Heavy Equipment",
   "proj.tag.agri": "Side Project · Agribusiness",
-  "proj.tag.aiGateway": "Side Project · AI Gateway",
-  "proj.tag.thisSite": "This Portfolio",
+  "proj.tag.komunal": "Product Owner · Fintech",
+  "proj.tag.edtech": "EdTech · Product",
   "proj.tag.20plus": "Portfolio",
   "proj.desc.forklift":
     "B2B heavy-equipment website. Core Web Vitals optimization, GA4 + Google Ads tracking, WhatsApp conversion pipeline.",
   "proj.desc.sayurindo":
     "Agribusiness and vegetable distribution sector. Data-driven Google Ads campaigns.",
-  "proj.desc.9router":
-    "Self-hosted AI gateway for model routing and optimization, with key management on your own server.",
-  "proj.desc.baniadam":
-    "Personal portfolio: Next.js, 3D hero, Core Web Vitals optimization from an engineering perspective.",
+  "proj.desc.depositobpr":
+    "Digital deposit product I own as Product Owner — DepositoBPR by Komunal. Digital deposit platform for Indonesian rural banks (BPR); digital banking, KYC, and onboarding.",
+  "proj.desc.kuncie":
+    "Digital learning platform (edtech) — product quality ensured via automated & E2E testing.",
   "proj.20plus.title": "20+ More Projects",
   "proj.desc.20plus":
     "A range of growth marketing and web development projects for businesses of all sizes.",
@@ -273,9 +271,9 @@ const EN: Record<MsgKey, string> = {
   "services.s3.title": "QA & Test Automation",
   "services.s3.desc":
     "Sustainable functional, API, regression, and E2E testing strategies with root-cause analysis.",
-  "services.s4.title": "Integration & Digital Banking",
+  "services.s4.title": "CRM & Omnichannel Integration",
   "services.s4.desc":
-    "Support third-party integrations, payment flows, and KYC / APU-PPT compliance.",
+    "CRM, omnichannel customer service, and chatbot integrations to support seamless customer operations.",
 
   "contact.title.a": "Have a project?",
   "contact.title.b": "Let's talk.",
