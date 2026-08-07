@@ -20,16 +20,20 @@ const LABELS = [
   "Analytics",
   "Google Ads",
   "WordPress",
+  "Hermes",
+  "n8n",
 ];
 
 // per-label orbit radius multiplier — stagger chips onto concentric rings so
 // adjacent labels sweep different radii instead of colliding on one orbit.
-const RINGS = [0.9, 0.593, 0.742, 1.054, 1.07, 1.696, 0.814, 0.936, 1.25, 1.247, 1.207, 0.581, 1.15];
+const RINGS = [0.9, 0.593, 0.742, 1.054, 1.07, 1.696, 0.814, 0.936, 1.25, 1.247, 1.207, 0.581, 1.15, 0.85, 0.68];
 
 // per-label drift direction (staggered so chips slowly separate over time).
 // Index-aligned with LABELS/RINGS: deleting a label must delete the same
 // index here or the alignment silently breaks.
 const ORBITS = [
+  { r: 1 },
+  { r: -1 },
   { r: 1 },
   { r: -1 },
   { r: 1 },

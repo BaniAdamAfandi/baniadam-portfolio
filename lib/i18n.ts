@@ -106,6 +106,8 @@ const ID = {
   "proj.tag.komunal": "Product Owner · Fintech",
   "proj.tag.edtech": "EdTech · Product",
   "proj.tag.20plus": "Portfolio",
+  "proj.tag.hermes": "AI Agent · Orchestrator",
+  "proj.tag.n8n": "Workflow Automation",
   "proj.desc.forklift":
     "Website B2B alat berat. Optimasi Core Web Vitals, GA4 + Google Ads tracking, WA conversion pipeline.",
   "proj.desc.sayurindo":
@@ -117,6 +119,10 @@ const ID = {
   "proj.20plus.title": "20+ Proyek Lainnya",
   "proj.desc.20plus":
     "Beragam proyek growth marketing dan pengembangan web untuk berbagai skala bisnis.",
+  "proj.desc.hermes":
+    "Automasi & orkestrasi AI agent: riset, laporan otomatis, monitoring SEO/Ads, dan delegasi kerja ke sub-agent (OMP) lewat Hermes Agent.",
+  "proj.desc.n8n":
+    "Automasi workflow dengan n8n — integrasi API, notifikasi, dan pipeline data untuk operasional digital.",
 
   // Services
   "services.eyebrow": "Layanan",
@@ -240,6 +246,8 @@ const EN: Record<MsgKey, string> = {
 
   "proj.eyebrow": "Projects",
   "proj.title": "Selected work",
+  "proj.tag.hermes": "AI Agent · Orchestrator",
+  "proj.tag.n8n": "Workflow Automation",
   "proj.sub": "A mix of engineering, performance, and growth marketing.",
   "proj.tag.b2bHeavy": "Side Project · B2B Heavy Equipment",
   "proj.tag.agri": "Side Project · Agribusiness",
@@ -252,6 +260,10 @@ const EN: Record<MsgKey, string> = {
     "Agribusiness and vegetable distribution sector. Data-driven Google Ads campaigns.",
   "proj.desc.depositobpr":
     "Digital deposit product I own as Product Owner — DepositoBPR by Komunal. Digital deposit platform for Indonesian rural banks (BPR); digital banking, KYC, and onboarding.",
+  "proj.desc.hermes":
+    "AI agent automation & orchestration: research, automated reporting, SEO/Ads monitoring, and delegating work to sub-agents (OMP) via Hermes Agent.",
+  "proj.desc.n8n":
+    "Workflow automation with n8n — API integrations, notifications, and data pipelines for digital operations.",
   "proj.desc.kuncie":
     "Digital learning platform (edtech) — product quality ensured via automated & E2E testing.",
   "proj.20plus.title": "20+ More Projects",

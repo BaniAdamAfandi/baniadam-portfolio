@@ -156,6 +156,20 @@ export const projects: Project[] = [
     url: "https://sayurindo.id",
   },
   {
+    title: "Hermes Agent",
+    tag: "proj.tag.hermes",
+    year: "2026",
+    desc: "proj.desc.hermes",
+    url: "https://hermes-agent.nousresearch.com",
+  },
+  {
+    title: "n8n Automation",
+    tag: "proj.tag.n8n",
+    year: "2026",
+    desc: "proj.desc.n8n",
+    url: null,
+  },
+  {
     title: "20+ Proyek Lainnya",
     tag: "proj.tag.20plus",
     year: "—",
