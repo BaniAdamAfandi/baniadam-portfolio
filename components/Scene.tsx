@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 
 const LABELS = [
   "IndonesiaForklift",
@@ -19,51 +19,30 @@ const LABELS = [
   "Node.js",
   "Analytics",
   "Google Ads",
-  "REST API",
-  "Figma",
   "WordPress",
-];
-
-// anchor offsets (% of container), spread around the sphere at alternating radii
-const ANCHORS = [
-  { x: "76%", y: "0%" },
-  { x: "54%", y: "-26%" },
-  { x: "47%", y: "59%" },
-  { x: "13%", y: "59%" },
-  { x: "-17%", y: "74%" },
-  { x: "-37%", y: "47%" },
-  { x: "-68%", y: "33%" },
-  { x: "-76%", y: "0%" },
-  { x: "-54%", y: "-26%" },
-  { x: "-47%", y: "-59%" },
-  { x: "-13%", y: "-59%" },
-  { x: "17%", y: "-74%" },
-  { x: "37%", y: "-47%" },
-  { x: "68%", y: "-33%" },
-  { x: "0%", y: "74%" },
 ];
 
 // per-label orbit radius multiplier — stagger chips onto concentric rings so
 // adjacent labels sweep different radii instead of colliding on one orbit.
-const RINGS = [0.33, 0.593, 0.742, 1.054, 1.07, 1.696, 0.814, 0.936, 1.25, 1.247, 1.207, 0.581, 1.522, 0.965, 0.209];
+const RINGS = [0.33, 0.593, 0.742, 1.054, 1.07, 1.696, 0.814, 0.936, 1.25, 1.247, 1.207, 0.581, 0.209];
 
-// orbit duration + direction per label (staggered so chips rarely overlap)
+// per-label drift direction (staggered so chips slowly separate over time).
+// Index-aligned with LABELS/RINGS: deleting a label must delete the same
+// index here or the alignment silently breaks.
 const ORBITS = [
-  { d: 26, r: 1 },
-  { d: 34, r: -1 },
-  { d: 22, r: 1 },
-  { d: 40, r: -1 },
-  { d: 28, r: 1 },
-  { d: 44, r: -1 },
-  { d: 24, r: 1 },
-  { d: 38, r: -1 },
-  { d: 30, r: 1 },
-  { d: 42, r: -1 },
-  { d: 26, r: 1 },
-  { d: 36, r: -1 },
-  { d: 32, r: 1 },
-  { d: 46, r: -1 },
-  { d: 29, r: 1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
+  { r: -1 },
+  { r: 1 },
 ];
 
 // widest labels get a slightly smaller font so they still fit inside the box
@@ -75,45 +54,67 @@ const LONG_LABELS: Record<string, boolean> = {
 const BURST_COUNT = 48;
 const BURST_LIFE = 0.9;
 
-function FloatingLabels({ radius, narrow }: { radius: number; narrow: boolean }) {
+// angular position of the label ring (fraction of a turn), written by the
+// canvas frame loop, read by the label DOM loop — no React re-renders.
+type SpinStore = { orbY: number };
+
+const TAU = Math.PI * 2;
+
+// labels ride a circle around the sphere, driven by the sphere's own turn so
+// the whole ring rotates with the globe ("tulisan ikut muter ngikutin
+// lingkaran"). Positions are mutated on a rAF loop; text never rotates, so
+// chips stay upright and readable while they travel.
+function FloatingLabels({ narrow, store }: { narrow: boolean; store: SpinStore }) {
   const reduce = useReducedMotion();
-  // On narrow (mobile) show a subset — 256px can't fit 15 chips without overlap
+  const chips = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    if (reduce) return;
+    let raf = 0;
+    const t0 = performance.now();
+    const step = () => {
+      const orb = store.orbY * TAU;
+      const now = (performance.now() - t0) / 1000;
+      chips.current.forEach((el, j) => {
+        if (!el) return;
+        const i = narrow ? j * 2 : j;
+        const { r } = ORBITS[i];
+        const angle = orb + (TAU * i * r) / LABELS.length + now * 0.05 * r;
+        const R = RINGS[i] * 24;
+        el.style.left = `calc(50% + ${Math.sin(angle) * R}%)`;
+        el.style.top = `calc(50% + ${Math.cos(angle) * R}%)`;
+      });
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [reduce, narrow, store]);
+
+  // On narrow (mobile) show a subset — small widths can't fit all chips without overlap
   const visible = narrow ? LABELS.filter((_, i) => i % 2 === 0) : LABELS;
+
   return (
     <div className="pointer-events-none absolute inset-0">
       {visible.map((label, j) => {
         const i = narrow ? j * 2 : j;
-        const { d, r } = ORBITS[i];
-        const a = ANCHORS[i];
-        // anchor offsets in % of container, orbit shrinks on narrow widths
-        const x = parseFloat(a.x) * radius * RINGS[i];
-        const y = parseFloat(a.y) * radius * RINGS[i];
+        const { r } = ORBITS[i];
+        const angle0 = (TAU * i * r) / LABELS.length;
+        const R = RINGS[i] * 24;
         return (
           <span
             key={label}
-            className="absolute"
-            style={{ left: `calc(50% + ${x}%)`, top: `calc(50% + ${y}%)` }}
+            ref={(el) => {
+              chips.current[j] = el;
+            }}
+            className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-emerald-400/30 bg-card/70 px-2.5 py-1 font-medium text-emerald-200/90 shadow-[0_0_14px_rgba(110,231,183,0.15)] backdrop-blur-sm ${
+              narrow ? "text-[10px]" : LONG_LABELS[label] ? "text-[11px]" : "text-xs"
+            }`}
+            style={{
+              left: `calc(50% + ${Math.sin(angle0) * R}%)`,
+              top: `calc(50% + ${Math.cos(angle0) * R}%)`,
+            }}
           >
-            <motion.span
-              className="block"
-              animate={reduce ? undefined : { rotate: 360 * r }}
-              transition={{ duration: d, repeat: Infinity, ease: "linear" }}
-            >
-              <motion.span
-                className="absolute block"
-                style={{ left: 5, top: -6 }}
-                animate={reduce ? undefined : { rotate: -360 * r }}
-                transition={{ duration: d, repeat: Infinity, ease: "linear" }}
-              >
-                <span
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-emerald-400/30 bg-card/70 px-2.5 py-1 font-medium text-emerald-200/90 shadow-[0_0_14px_rgba(110,231,183,0.15)] backdrop-blur-sm ${
-                    narrow ? "text-[10px]" : LONG_LABELS[label] ? "text-[11px]" : "text-xs"
-                  }`}
-                >
-                  {label}
-                </span>
-              </motion.span>
-            </motion.span>
+            {label}
           </span>
         );
       })}
@@ -121,12 +122,13 @@ function FloatingLabels({ radius, narrow }: { radius: number; narrow: boolean })
   );
 }
 
-function HeroScene() {
+function HeroScene({ store, narrow }: { store: SpinStore; narrow: boolean }) {
   const mesh = useRef<THREE.Mesh>(null);
   const dust = useRef<THREE.Group>(null);
   const burstPoints = useRef<THREE.Points>(null);
   const burstAttr = useRef<THREE.BufferAttribute>(null);
   const burstMat = useRef<THREE.PointsMaterial>(null);
+  const scrollY = useRef(0);
 
   const dustPositions = useMemo(() => {
     const count = 300;
@@ -153,21 +155,46 @@ function HeroScene() {
   const burstAge = useRef(-1);
   const pulse = useRef(0);
   const spin = useRef(1);
+  // rotation eased toward the pointer (desktop) or scroll tilt (mobile)
+  const targetRot = useRef(new THREE.Vector2(0, 0));
+  const rot = useRef(new THREE.Vector2(0, 0));
   const t = useRef(0);
 
-  useFrame((_, delta) => {
+  // Mobile has no hover: react to scroll instead. Mutate a ref — no re-renders.
+  useEffect(() => {
+    scrollY.current = window.scrollY;
+    const onScroll = () => (scrollY.current = window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useFrame((state, delta) => {
     t.current += delta;
     pulse.current = Math.max(0, pulse.current - delta * 2.4);
     spin.current = Math.max(1, spin.current - delta * 1.6);
 
     const m = mesh.current;
     if (m) {
+      if (narrow) {
+        // scroll tilt (gentle sway as the page moves)
+        targetRot.current.x = Math.sin(scrollY.current * 0.0016) * 0.18;
+        targetRot.current.y = Math.cos(scrollY.current * 0.0011) * 0.22 + t.current * 0.22;
+      } else {
+        // follow the pointer, plus a slow idle drift so it never freezes
+        targetRot.current.x = state.pointer.y * 0.35;
+        targetRot.current.y = state.pointer.x * 0.35 + t.current * 0.22;
+      }
+      rot.current.lerp(targetRot.current, Math.min(1, delta * 4));
+
       const breathe = 1 + Math.sin(t.current * 1.4) * 0.025;
       m.scale.setScalar(breathe * (1 + pulse.current * 0.22));
-      m.rotation.x = t.current * 0.15 + Math.sin(t.current * 0.5) * 0.1;
-      m.rotation.y = t.current * 0.25 * spin.current + Math.cos(t.current * 0.35) * 0.08;
+      m.rotation.x = rot.current.x + Math.sin(t.current * 0.5) * 0.1;
+      m.rotation.y = rot.current.y * spin.current + Math.cos(t.current * 0.35) * 0.08;
     }
     if (dust.current) dust.current.rotation.y += delta * 0.02;
+
+    // label ring turns with the sphere (also spins up during the click burst)
+    store.orbY = (store.orbY + delta * 0.045 * spin.current) % 1;
 
     if (burstAge.current >= 0) {
       burstAge.current += delta;
@@ -258,6 +285,7 @@ function HeroScene() {
 export function Scene() {
   const wrap = useRef<HTMLDivElement>(null);
   const [narrow, setNarrow] = useState(false);
+  const store = useMemo<SpinStore>(() => ({ orbY: 0 }), []);
 
   useEffect(() => {
     const el = wrap.current;
@@ -277,10 +305,10 @@ export function Scene() {
         <ambientLight intensity={0.6} />
         <pointLight position={[5, 5, 5]} intensity={20} />
         <Suspense fallback={null}>
-          <HeroScene />
+          <HeroScene store={store} narrow={narrow} />
         </Suspense>
       </Canvas>
-      <FloatingLabels radius={0.65} narrow={narrow} />
+      <FloatingLabels narrow={narrow} store={store} />
     </div>
   );
 }
