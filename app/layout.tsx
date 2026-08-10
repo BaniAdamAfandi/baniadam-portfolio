@@ -18,16 +18,19 @@ const SITE_URL = "https://baniadam.biz.id";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
+  title: {
+    default: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
+    template: "%s — Bani Adam Afandi",
+  },
   description:
-    "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+    "Portofolio Bani Adam Afandi — Product Owner & Software Quality Engineer di Jakarta. Produk fintech & edtech (DepositoBPR by Komunal, Kuncie), QA/SDET, web performance.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
     description:
-      "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+      "Portofolio Bani Adam Afandi — Product Owner & Software Quality Engineer di Jakarta. Produk fintech & edtech (DepositoBPR by Komunal, Kuncie), QA/SDET, web performance.",
     url: SITE_URL,
     type: "website",
     siteName: site.name,
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Bani Adam Afandi — Product Owner & Software Quality Engineer",
     description:
-      "Digital Marketer · Next.js Developer. Performance marketing, web performance optimization, dan engineering.",
+      "Portofolio Bani Adam Afandi — Product Owner & Software Quality Engineer di Jakarta. Produk fintech & edtech (DepositoBPR by Komunal, Kuncie), QA/SDET, web performance.",
     images: ["/icon.png"],
   },
 };
