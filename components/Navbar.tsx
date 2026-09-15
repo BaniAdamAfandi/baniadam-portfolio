@@ -4,6 +4,7 @@ import { Logo } from "@/components/Logo";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Languages, Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { site } from "@/lib/data";
 import { useI18n } from "@/lib/i18n-provider";
 import type { MsgKey } from "@/lib/i18n";
@@ -75,6 +76,7 @@ export function Navbar() {
                 {t(l.key)}
               </a>
             ))}
+            <ThemeToggle />
             <LangSwitch locale={locale} setLocale={setLocale} t={t} />
             <a
               href={`mailto:${site.email}`}
@@ -85,6 +87,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <LangSwitch locale={locale} setLocale={setLocale} t={t} />
             <button
               className="p-2 text-fg"

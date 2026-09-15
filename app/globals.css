@@ -12,11 +12,27 @@
 }
 
 :root {
+  /* Dark theme (default) */
+.light {
+  --bg: #f8faf9;
+  --fg: #1a2e23;
+  --card: #ffffff;
+  --line: #d4e0d8;
+  --muted: #5a7a66;
+}
   --bg: #0a0f0d;
   --fg: #e8f2ec;
   --card: #0f1712;
   --line: #1f2a24;
   --muted: #9db3a6;
+}
+
+.light {
+  --bg: #f8faf9;
+  --fg: #1a2e23;
+  --card: #ffffff;
+  --line: #d4e0d8;
+  --muted: #5a7a66;
 }
 
 html {
