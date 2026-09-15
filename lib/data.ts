@@ -84,7 +84,7 @@ export const experiences: Experience[] = [
     type: "exp.type.contract",
     period: "exp.4.period",
     location: "exp.loc.south",
-    bullets: ["exp.4.b1", "exp.4.b2"],
+    bullets: ["exp.4.b1", "exp.4.b2", "exp.4.b3"],
   },
   {
     role: "Administrator Database PRM",

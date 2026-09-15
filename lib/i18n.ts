@@ -87,6 +87,7 @@ const ID = {
   "exp.4.b1":
     "Functional, regression, integration, dan API testing lintas produk.",
   "exp.4.b2": "Dokumentasi defect, koordinasi perbaikan, dan validasi pre-release.",
+  "exp.4.b3": "Testing EDC (Electronic Data Capture) dan integrasi payment terminal.",
   "exp.5.period": "Apr 2021 – Sep 2021 · 6 bln",
   "exp.5.b1":
     "Menjaga catatan database operasional (PRM), validasi data, reporting, dan konsistensi data.",
@@ -236,6 +237,7 @@ const EN: Record<MsgKey, string> = {
   "exp.4.period": "Sep 2021 – Mar 2022 · 7 mo",
   "exp.4.b1": "Functional, regression, integration, and API testing across products.",
   "exp.4.b2": "Defect documentation, fix coordination, and pre-release validation.",
+  "exp.4.b3": "EDC (Electronic Data Capture) testing and payment terminal integration.",
   "exp.5.period": "Apr 2021 – Sep 2021 · 6 mo",
   "exp.5.b1":
     "Maintained operational database (PRM) records, data validation, reporting, and data consistency.",
