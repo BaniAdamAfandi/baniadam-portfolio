@@ -86,13 +86,14 @@ const ID = {
   "exp.4.period": "Sep 2021 – Mar 2022 · 7 bln",
   "exp.4.b1":
     "Functional, regression, integration, dan API testing lintas produk.",
-  "exp.4.b2": "Dokumentasi defect, koordinasi perbaikan, dan validasi pre-release.",
-  "exp.4.b3": "Testing EDC (Electronic Data Capture) dengan kartu kredit, kartu debit, QRIS, dan integrasi payment gateway.",
+  "exp.4.b2": "Menjalankan functional hardware-software integration testing, memastikan akurasi data antara EDC front-end sales drafts dan back-end host systems.",
+  "exp.4.b3": "Melakukan system regression testing dan mendokumentasikan test logs serta bukti untuk compliance dan debugging.",
   "exp.5.period": "Apr 2021 – Sep 2021 · 6 bln",
   "exp.5.b1":
-    "Menjaga catatan database operasional (PRM), validasi data, reporting, dan konsistensi data.",
+    "Menjalankan operasi query database menggunakan SQL Server untuk memenuhi permintaan data lintas departemen.",
   "exp.5.b2":
-    "Memastikan data akurat guna mendukung operasional dan pengambilan keputusan.",
+    "Mengelola operasi untuk akun Partner Relationship Management (PRM), termasuk pembuatan, pemeliharaan, dan manajemen akses akun.",
+  "exp.5.b3": "Membuat laporan analitis performa PRM bulanan menggunakan Microsoft Excel.",
 
   // Education
   "edu.focus": "Sistem informasi, analisis data, manajemen proyek.",
@@ -230,18 +231,19 @@ const EN: Record<MsgKey, string> = {
     "Built automated and manual testing scenarios to increase release confidence.",
   "exp.2.b3":
     "Translated requirements into test cases; collaborated with Product, Engineering, and Design.",
-  "exp.2.b4": "Investigated defects, documented, analyzed root cause, and validated fixes.",
+  "exp.2.b4": "Conducted security testing aligned with OWASP standards using Burp Suite to identify and mitigate potential vulnerabilities.",
   "exp.3.period": "Jul 2022 – Feb 2023 · 8 mo",
   "exp.3.b1":
     "Mentored participants in QA fundamentals, test scenarios & cases, bug reporting, API testing, and industry workflows.",
   "exp.4.period": "Sep 2021 – Mar 2022 · 7 mo",
-  "exp.4.b1": "Functional, regression, integration, and API testing across products.",
-  "exp.4.b2": "Defect documentation, fix coordination, and pre-release validation.",
-  "exp.4.b3": "EDC (Electronic Data Capture) testing with credit card, debit card, QRIS, and payment gateway integration.",
+  "exp.4.b1": "Designed test plans and structured positive/negative test scenarios for Electronic Data Capture (EDC) devices.",
+  "exp.4.b2": "Executed functional hardware-software integration testing, ensuring data accuracy between EDC front-end sales drafts and back-end host systems.",
+  "exp.4.b3": "Conducted system regression testing and documented detailed test logs and evidence for compliance and debugging.",
   "exp.5.period": "Apr 2021 – Sep 2021 · 6 mo",
   "exp.5.b1":
     "Maintained operational database (PRM) records, data validation, reporting, and data consistency.",
-  "exp.5.b2": "Ensured accurate data to support operations and decision-making.",
+  "exp.5.b2": "Managed operations for Partner Relationship Management (PRM) accounts, including account creation, maintenance, and access management.",
+  "exp.5.b3": "Generated monthly analytical PRM performance reports using Microsoft Excel.",
 
   "edu.focus": "Information systems, data analysis, project management.",
   "edu.degree": "B.Sc. Information Systems",

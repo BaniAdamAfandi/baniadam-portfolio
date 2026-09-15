@@ -11,28 +11,28 @@ export const skills = [
   {
     title: "Product",
     items: [
-      { name: "Product Ownership & Roadmap", level: 92 },
-      { name: "Backlog Prioritization & PRD", level: 90 },
-      { name: "User Stories & Acceptance Criteria", level: 90 },
-      { name: "Starac & UAT · Agile/Scrum", level: 88 },
+      { name: "Agile/Scrum & Sprint Planning", level: 92 },
+      { name: "Product Backlog Prioritization", level: 90 },
+      { name: "Release Management & Feature Review", level: 90 },
+      { name: "Stakeholder Alignment & PRD", level: 88 },
     ],
   },
   {
-    title: "Technical & QA",
+    title: "Testing & Automation",
     items: [
-      { name: "REST API & System Integration", level: 90 },
-      { name: "SQL & Database Analysis", level: 88 },
-      { name: "Functional · Regression · API · E2E", level: 90 },
-      { name: "Test Automation & Root Cause", level: 86 },
+      { name: "TestCafe (Automation)", level: 90 },
+      { name: "Mocha, Chai, Postman (API)", level: 88 },
+      { name: "Regression, E2E, UAT", level: 90 },
+      { name: "OWASP, Burp Suite (Security)", level: 86 },
     ],
   },
   {
-    title: "Tools & Domain",
+    title: "Tools & Analytics",
     items: [
-      { name: "Postman · ClickUp · Figma", level: 88 },
-      { name: "Firebase · GA4 · GTM · Datadog", level: 85 },
-      { name: "Strategic & Digital Deposits · Payments", level: 87 },
-      { name: "KYC · EdTech · Git/GitHub", level: 84 },
+      { name: "Jira · Xray · ClickUp", level: 88 },
+      { name: "K6 · Google Lighthouse (Performance)", level: 85 },
+      { name: "SQL Server · CleverTap · AppsFlyer", level: 87 },
+      { name: "JavaScript · Git/GitHub", level: 84 },
     ],
   },
 ];
@@ -64,7 +64,7 @@ export const experiences: Experience[] = [
   },
   {
     role: "Junior SDET (Software Development Engineer in Test)",
-    company: "Kuncie",
+    company: "Kuncie Pintar Nusantara",
     type: "exp.type.fulltime",
     period: "exp.2.period",
     location: "exp.loc.hybrid",
@@ -80,19 +80,19 @@ export const experiences: Experience[] = [
   },
   {
     role: "Software QA Tester",
-    company: "PT Mitra Transaksi Indonesia (\"yokke!\")",
+    company: "PT Mitra Transaksi Indonesia",
     type: "exp.type.contract",
     period: "exp.4.period",
     location: "exp.loc.south",
     bullets: ["exp.4.b1", "exp.4.b2", "exp.4.b3"],
   },
   {
-    role: "Administrator Database PRM",
+    role: "Administrator",
     company: "Kalbe Nutritionals (PT Sanghiang Perkasa)",
     type: "exp.type.contract",
     period: "exp.5.period",
     location: "exp.loc.north",
-    bullets: ["exp.5.b1", "exp.5.b2"],
+    bullets: ["exp.5.b1", "exp.5.b2", "exp.5.b3"],
   },
 ];
 
