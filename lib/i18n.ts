@@ -27,7 +27,7 @@ const ID = {
   "about.eyebrow": "Tentang",
   "about.title": "Data-driven, hasil nyata",
   "about.bio.1":
-    "Technical Product Owner dengan fondasi kuat di Software Quality Assurance dan SDET, berpengalaman mengantar produk digital lintas fintech dan edtech — dari discovery, PRD, UAT, rilis, hingga monitoring.",
+    "Technical Product Owner dengan fondasi kuat di Software Quality Assurance dan SDET, berpengalaman mengantar produk digital lintas fintech dan edtech, dari discovery, PRD, UAT, rilis, hingga monitoring.",
   "about.bio.2":
     "Terampil menerjemahkan kebutuhan bisnis, pelanggan, operasional, dan regulasi menjadi requirement produk yang jelas, bekerja erat dengan Engineering, QA, UI/UX, Operations, Commercial, dan Marketing.",
   "about.bio.3":
@@ -60,7 +60,7 @@ const ID = {
   "exp.loc.north": "Jakarta Utara",
   "exp.1.period": "Des 2023 – Sekarang · ±2,5 tahun",
   "exp.1.b1":
-    "Mengelola inisiatif produk DepositoBPR lintas mobile, web, admin portal, dan backend — dari discovery, UAT, rilis, hingga monitoring.",
+    "Mengelola inisiatif produk DepositoBPR lintas mobile, web, admin portal, dan backend, dari discovery, UAT, rilis, hingga monitoring.",
   "exp.1.b2":
     "Menerjemahkan kebutuhan bisnis, pelanggan, operasional, dan regulasi menjadi PRD, user stories, acceptance criteria, dan backlog terprioritas.",
   "exp.1.b3":
@@ -68,7 +68,7 @@ const ID = {
   "exp.1.b4":
     "Memimpin inisiatif di seluruh area produk: deposit digital, pembayaran/disbursement, promosi, deposan korporasi, KYC, manajemen biaya BPR, analytics, dan sistem operasional.",
   "exp.1.b5":
-    "Mendukung integrasi pihak ketiga dan alur keuangan kompleks — identitas, payment provider, callback, scheduler — serta investigasi masalah produksi lewat API, database, log, caching, dan business rules untuk root cause.",
+    "Mendukung integrasi pihak ketiga dan alur keuangan kompleks (identitas, payment provider, callback, scheduler) serta investigasi masalah produksi lewat API, database, log, caching, dan business rules untuk root cause.",
   "exp.1.b6":
     "Mendukung keamanan/compliance/regulasi: KYC, APU-PPT, dan remediasi hasil pen-testing.",
   "exp.2.period": "Mar 2022 – Des 2023 · 1 thn 10 bln",
@@ -115,22 +115,22 @@ const ID = {
   "proj.desc.sayurindo":
     "Sektor agribisnis dan distribusi sayur. Kampanye Google Ads berbasis data.",
   "proj.desc.depositobpr":
-    "Produk deposito digital yang saya kelola sebagai Product Owner — DepositoBPR by Komunal. Platform deposito digital bank perekonomian rakyat (BPR) dengan proto digital deposit experience, KYC, dan onboarding.",
+    "Produk deposito digital yang saya kelola sebagai Product Owner: DepositoBPR by Komunal. Platform deposito digital bank perekonomian rakyat (BPR) dengan proto digital deposit experience, KYC, dan onboarding.",
   "proj.desc.kuncie":
-    "Platform pembelajaran digital (edtech) — kualitas produk diuji lewat testing otomatis & E2E.",
+    "Platform pembelajaran digital (edtech), kualitas produk diuji lewat testing otomatis & E2E.",
   "proj.20plus.title": "20+ Proyek Lainnya",
   "proj.desc.20plus":
     "Beragam proyek growth marketing dan pengembangan web untuk berbagai skala bisnis.",
   "proj.desc.hermes":
     "Automasi & orkestrasi AI agent: riset, laporan otomatis, monitoring SEO/Ads, dan delegasi kerja ke sub-agent (OMP) lewat Hermes Agent.",
   "proj.desc.n8n":
-    "Automasi workflow dengan n8n — integrasi API, notifikasi, dan pipeline data untuk operasional digital.",
+    "Automasi workflow dengan n8n: integrasi API, notifikasi, dan pipeline data untuk operasional digital.",
 
   // Services
   "services.eyebrow": "Layanan",
   "services.title": "Apa yang saya kerjakan",
   "services.sub":
-    "Dari audit performa sampai kampanye berbasis data — satu alur: ukur, optimasi, ulangi.",
+    "Dari audit performa sampai kampanye berbasis data, satu alur: ukur, optimasi, ulangi.",
   "services.s1.title": "Product Ownership & Roadmap",
   "services.s1.desc":
     "Backlog terprioritas, PRD, acceptance criteria, dan delivery produk fintech end-to-end.",
@@ -148,11 +148,11 @@ const ID = {
   "contact.title.a": "Punya proyek?",
   "contact.title.b": "Mari diskusi.",
   "contact.body":
-    "Butuh website cepat, campaign yang terukur, atau optimasi performa? Kirim pesan — saya balas secepatnya.",
+    "Butuh website cepat, campaign yang terukur, atau optimasi performa? Kirim pesan, saya balas secepatnya.",
   "contact.cta": "Kirim Email",
 
   // Footer
-  "footer.tagline": "Digital Growth & Web Performance — Indonesia",
+  "footer.tagline": "Digital Growth & Web Performance, Indonesia",
   "footer.cv": "Unduh CV",
 } as const;
 
@@ -182,7 +182,7 @@ const EN: Record<MsgKey, string> = {
   "about.eyebrow": "About",
   "about.title": "Data-driven, real results",
   "about.bio.1":
-    "Technical Product Owner with a strong foundation in Software Quality Assurance and SDET, delivering digital products across fintech and edtech — from discovery, PRD, UAT, release, to monitoring.",
+    "Technical Product Owner with a strong foundation in Software Quality Assurance and SDET, delivering digital products across fintech and edtech, from discovery, PRD, UAT, release, to monitoring.",
   "about.bio.2":
     "Skilled at translating business, customer, operational, and regulatory needs into clear product requirements, working closely with Engineering, QA, UI/UX, Operations, Commercial, and Marketing.",
   "about.bio.3":
@@ -213,7 +213,7 @@ const EN: Record<MsgKey, string> = {
   "exp.loc.north": "North Jakarta",
   "exp.1.period": "Dec 2023 – Present · ±2.5 years",
   "exp.1.b1":
-    "Manage DepositoBPR product initiatives across mobile, web, admin portal, and backend — from discovery, UAT, release, to monitoring.",
+    "Manage DepositoBPR product initiatives across mobile, web, admin portal, and backend, from discovery, UAT, release, to monitoring.",
   "exp.1.b2":
     "Translate business, customer, operational, and regulatory needs into PRDs, user stories, acceptance criteria, and a prioritized backlog.",
   "exp.1.b3":
@@ -221,7 +221,7 @@ const EN: Record<MsgKey, string> = {
   "exp.1.b4":
     "Lead initiatives across the entire product surface: digital deposits, payments/disbursement, promotions, corporate depositors, KYC, BPR cost management, analytics, and operational systems.",
   "exp.1.b5":
-    "Support third-party integrations and complex financial flows — identity, payment providers, callbacks, schedulers — and investigate production issues through API, database, logs, caching, and business rules to find root cause.",
+    "Support third-party integrations and complex financial flows (identity, payment providers, callbacks, schedulers) and investigate production issues through API, database, logs, caching, and business rules to find root cause.",
   "exp.1.b6":
     "Support security/compliance/regulatory work: KYC, APU-PPT, and remediation of pen-testing findings.",
   "exp.2.period": "Mar 2022 – Dec 2023 · 1 yr 10 mo",
@@ -263,13 +263,13 @@ const EN: Record<MsgKey, string> = {
   "proj.desc.sayurindo":
     "Agribusiness and vegetable distribution sector. Data-driven Google Ads campaigns.",
   "proj.desc.depositobpr":
-    "Digital deposit product I own as Product Owner — DepositoBPR by Komunal. Digital deposit platform for Indonesian rural banks (BPR); digital banking, KYC, and onboarding.",
+    "Digital deposit product I own as Product Owner: DepositoBPR by Komunal. Digital deposit platform for Indonesian rural banks (BPR); digital banking, KYC, and onboarding.",
   "proj.desc.hermes":
     "AI agent automation & orchestration: research, automated reporting, SEO/Ads monitoring, and delegating work to sub-agents (OMP) via Hermes Agent.",
   "proj.desc.n8n":
-    "Workflow automation with n8n — API integrations, notifications, and data pipelines for digital operations.",
+    "Workflow automation with n8n: API integrations, notifications, and data pipelines for digital operations.",
   "proj.desc.kuncie":
-    "Digital learning platform (edtech) — product quality ensured via automated & E2E testing.",
+    "Digital learning platform (edtech), product quality ensured via automated & E2E testing.",
   "proj.20plus.title": "20+ More Projects",
   "proj.desc.20plus":
     "A range of growth marketing and web development projects for businesses of all sizes.",
@@ -277,7 +277,7 @@ const EN: Record<MsgKey, string> = {
   "services.eyebrow": "Services",
   "services.title": "What I do",
   "services.sub":
-    "From performance audits to data-driven campaigns — one loop: measure, optimize, repeat.",
+    "From performance audits to data-driven campaigns, one loop: measure, optimize, repeat.",
   "services.s1.title": "Product Ownership & Roadmap",
   "services.s1.desc":
     "Prioritized backlog, PRDs, acceptance criteria, and end-to-end fintech product delivery.",
@@ -294,10 +294,10 @@ const EN: Record<MsgKey, string> = {
   "contact.title.a": "Have a project?",
   "contact.title.b": "Let's talk.",
   "contact.body":
-    "Need a fast website, measurable campaigns, or performance optimization? Send a message — I'll get back to you right away.",
+    "Need a fast website, measurable campaigns, or performance optimization? Send a message, I'll get back to you right away.",
   "contact.cta": "Send Email",
 
-  "footer.tagline": "Digital Growth & Web Performance — Indonesia",
+  "footer.tagline": "Digital Growth & Web Performance, Indonesia",
   "footer.cv": "Download CV",
 };
 
