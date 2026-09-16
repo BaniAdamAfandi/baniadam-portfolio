@@ -55,7 +55,7 @@ export function Skills() {
         title={t("skills.title")}
         sub={t("skills.sub")}
       />
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {skills.map((cat, i) => (
           <SkillCard key={cat.title} {...cat} delay={i * 0.1} />
         ))}

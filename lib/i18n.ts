@@ -17,7 +17,7 @@ const ID = {
 
   // Hero
   "hero.location": "Jakarta, Indonesia",
-  "hero.headline": "Product Owner & Software Quality Engineer",
+  "hero.headline": "Quality Assurance Engineer & Product Owner",
   "hero.role": "Product · QA · Growth & Web Performance",
   "hero.ctaProjects": "Lihat Proyek",
   "hero.ctaContact": "Hubungi Saya",
@@ -173,7 +173,7 @@ const EN: Record<MsgKey, string> = {
   "cta.contact": "Contact",
 
   "hero.location": "Jakarta, Indonesia",
-  "hero.headline": "Product Owner & Software Quality Engineer",
+  "hero.headline": "Quality Assurance Engineer & Product Owner",
   "hero.role": "Product · QA · Growth & Web Performance",
   "hero.ctaProjects": "View Projects",
   "hero.ctaContact": "Contact Me",

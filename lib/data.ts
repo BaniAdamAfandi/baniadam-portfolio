@@ -9,30 +9,46 @@ export const site = {
 
 export const skills = [
   {
-    title: "Product",
+    title: "Product Ownership",
     items: [
-      { name: "Agile/Scrum & Sprint Planning", level: 92 },
-      { name: "Product Backlog Prioritization", level: 90 },
-      { name: "Release Management & Feature Review", level: 90 },
-      { name: "Stakeholder Alignment & PRD", level: 88 },
+      { name: "Agile/Scrum", level: 92 },
+      { name: "Backlog Prioritization", level: 90 },
+      { name: "Sprint Planning", level: 90 },
+      { name: "Release Management", level: 88 },
+      { name: "Feature Review", level: 88 },
+      { name: "Stakeholder Alignment", level: 87 },
     ],
   },
   {
     title: "Testing & Automation",
     items: [
-      { name: "TestCafe (Automation)", level: 90 },
-      { name: "Mocha, Chai, Postman (API)", level: 88 },
+      { name: "TestCafe", level: 90 },
+      { name: "Mocha, Chai, Postman", level: 88 },
       { name: "Regression, E2E, UAT", level: 90 },
-      { name: "OWASP, Burp Suite (Security)", level: 86 },
+    ],
+  },
+  {
+    title: "Performance & Security",
+    items: [
+      { name: "K6", level: 86 },
+      { name: "Google Lighthouse", level: 85 },
+      { name: "OWASP", level: 84 },
+      { name: "Burp Suite", level: 83 },
     ],
   },
   {
     title: "Tools & Analytics",
     items: [
       { name: "Jira · Xray · ClickUp", level: 88 },
-      { name: "K6 · Google Lighthouse (Performance)", level: 85 },
-      { name: "SQL Server · CleverTap · AppsFlyer", level: 87 },
-      { name: "JavaScript · Git/GitHub", level: 84 },
+      { name: "SQL Server", level: 87 },
+      { name: "CleverTap · AppsFlyer", level: 85 },
+    ],
+  },
+  {
+    title: "Languages",
+    items: [
+      { name: "JavaScript", level: 86 },
+      { name: "SQL", level: 88 },
     ],
   },
 ];
